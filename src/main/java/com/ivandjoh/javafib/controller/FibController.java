@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 
@@ -66,4 +67,26 @@ public class FibController {
         return ResponseEntity.ok(filename);
     }
 
+    /**
+     * Get fibonacci sequence
+     *
+     * @param
+     * @return
+
+     * develop by Ivan Djoh
+     * february 8, 2023
+     */
+    @GetMapping("/get-sequence")
+    public ResponseEntity<String> getFibSequence(@RequestParam String fileName) {
+
+        String sequence;
+        try {
+            sequence = FibHelper.getSequenceByFilename(fileName);
+        } catch (FileNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("File not found, Please try again." + e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong, Please try again.");
+        }
+        return ResponseEntity.ok(sequence);
+    }
 }

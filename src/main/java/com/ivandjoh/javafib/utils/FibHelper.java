@@ -4,11 +4,10 @@ import com.ivandjoh.javafib.exception.FibInputException;
 import com.ivandjoh.javafib.exception.FibOutOfRangeException;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FibHelper {
@@ -21,7 +20,6 @@ public class FibHelper {
      * develop by Ivan Djoh
      * february 8, 2023
      */
-
     public static int execFib(int position) throws FibOutOfRangeException {
         if (position <= 1) {
             return position;
@@ -32,6 +30,14 @@ public class FibHelper {
         return execFib(position - 1) + execFib(position - 2);
     }
 
+    /**
+     * generate the Fibonacci sequence without recursion
+     * @param 'String' number of numbers that should be included in the fibonacci sequence
+     * @return List of integers that represent the Fibonacci sequence
+
+     * develop by Ivan Djoh
+     * february 8, 2023
+     */
     public static List<Integer> getSequence(String str, List<Integer> sequence) throws FibInputException {
 
         int n;
@@ -56,6 +62,14 @@ public class FibHelper {
         return sequence;
     }
 
+    /**
+     * Save the Fibonacci sequence into a text file
+     * @param 'sequence' list of integer into  Fibonacci sequence
+     * @return String name of the file where the sequence is stored
+
+     * develop by Ivan Djoh
+     * february 8, 2023
+     */
     public static String writeSequence(List<Integer> fibSequence) throws IOException {
 
         String filename = "fibonacci-sequence.txt";
@@ -72,5 +86,17 @@ public class FibHelper {
         writer.flush();
         writer.close();
         return filename;
+    }
+
+    /**
+     * Read the Fibonacci sequence from a text file
+
+     * develop by Ivan Djoh
+     * february 8, 2023
+     */
+    public static String getSequenceByFilename(String fileName) throws FileNotFoundException {
+        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+
+        return reader.lines().collect(Collectors.joining());
     }
 }
