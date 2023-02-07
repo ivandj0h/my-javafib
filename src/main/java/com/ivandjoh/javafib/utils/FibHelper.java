@@ -17,7 +17,7 @@ public class FibHelper {
      * @param 'position' the position in the Fibonacci sequence ( i.e. 8th number in the sequence )
      * @return the Fibonacci number at the given position
 
-     * develop by Ivan Djoh
+     * develop by Ivandjoh
      * february 8, 2023
      */
     public static int execFib(int position) throws FibOutOfRangeException {
@@ -35,7 +35,7 @@ public class FibHelper {
      * @param 'String' number of numbers that should be included in the fibonacci sequence
      * @return List of integers that represent the Fibonacci sequence
 
-     * develop by Ivan Djoh
+     * develop by Ivandjoh
      * february 8, 2023
      */
     public static List<Integer> getSequence(String str, List<Integer> sequence) throws FibInputException {
@@ -67,7 +67,7 @@ public class FibHelper {
      * @param 'sequence' list of integer into  Fibonacci sequence
      * @return String name of the file where the sequence is stored
 
-     * develop by Ivan Djoh
+     * develop by Ivandjoh
      * february 8, 2023
      */
     public static String writeSequence(List<Integer> fibSequence) throws IOException {
@@ -91,7 +91,7 @@ public class FibHelper {
     /**
      * Read the Fibonacci sequence from a text file
 
-     * develop by Ivan Djoh
+     * develop by Ivandjoh
      * february 8, 2023
      */
     public static String getSequenceByFilename(String fileName) throws FileNotFoundException {
