@@ -20,8 +20,8 @@ public class FibController {
      *
      * @param "n" position in the Fibonacci number requested
      * @return the nth Fibonacci number in the sequence
-
-     * develop by Ivan Djoh
+     * <p>
+     * develop by Ivandjoh
      * february 8, 2023
      */
     @GetMapping("/find-number")
@@ -43,8 +43,8 @@ public class FibController {
      *
      * @param "n" position in the Fibonacci number requested
      * @return the name of the file where the sequence is stored
-
-     * develop by Ivan Djoh
+     * <p>
+     * develop by Ivandjoh
      * february 8, 2023
      */
     @PostMapping("/create-sequence")
@@ -71,9 +71,7 @@ public class FibController {
      * Get fibonacci sequence
      *
      * @param
-     * @return
-
-     * develop by Ivan Djoh
+     * @return develop by Ivandjoh
      * february 8, 2023
      */
     @GetMapping("/get-sequence")
@@ -89,4 +87,36 @@ public class FibController {
         }
         return ResponseEntity.ok(sequence);
     }
+
+    /**
+     * Determine the Golden Ratio for given index in Array
+     *
+     * @param 'n' position of the Fibonacci number requested
+     * @return the Golden Ratio between n index and n-1 index
+     * <p>
+     * develop by Ivandjoh
+     * february 8, 2023
+     */
+    @GetMapping("/find-ratio")
+    public ResponseEntity<String> findGoldenRatio(@RequestParam int number) {
+
+        int result;
+        try {
+            int dividend = FibHelper.execFib(number);
+            int divisor = FibHelper.execFib(number - 1);
+            if (divisor == 0) {
+                return ResponseEntity.ok("0");
+            }
+            result = dividend / divisor;
+        } catch (ArithmeticException e) {
+            return ResponseEntity.ok("0");
+        } catch (FibOutOfRangeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+       catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Something went wrong, Please try again.");
+        }
+        return ResponseEntity.ok(String.valueOf(result));
+    }
 }
+
